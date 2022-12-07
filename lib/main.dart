@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trainxercise/profile_screen.dart';
 import 'package:trainxercise/workout_screen.dart';
 
 Map<int, Color> color = {
@@ -20,8 +21,21 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int currentInd = 0;
+  final screens = [
+    WorkoutScreen(),
+    Container(),
+    Container(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +46,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: primaryColor,
       ),
-      home: const WorkoutScreen(),
+      home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Workout"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.search), label: "Exercises"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.add), label: "Add Workout"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
+          ],
+          fixedColor: const Color.fromRGBO(88, 11, 241, 1),
+          unselectedItemColor: Colors.black,
+          currentIndex: currentInd,
+          onTap: (index) => setState( ()=> currentInd = index),
+        ),
+        body: screens[currentInd],
+      ),
     );
   }
 }

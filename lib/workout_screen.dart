@@ -24,21 +24,8 @@ class WorkoutScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Trainxercise'),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Workout"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: "Exercises"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.add), label: "Add Workout"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
-          ],
-          fixedColor: const Color.fromRGBO(88, 11, 241, 1),
-          unselectedItemColor: Colors.black,
-          currentIndex: 0,
-        ),
         body: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overscroll){
+          onNotification: (overscroll) {
             overscroll.disallowIndicator();
             return false;
           },
@@ -119,11 +106,11 @@ class WorkoutScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 7, right: 20),
                       child: ElevatedButton(
                         onPressed: () => {},
-                        child: Text("Done"),
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)))),
+                        child: const Text("Done"),
                       ),
                     )
                   ],
