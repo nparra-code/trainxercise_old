@@ -16,7 +16,7 @@ class SetListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.only(top: 15, bottom: 15),
       child: Column(
         children: [
           Container(
