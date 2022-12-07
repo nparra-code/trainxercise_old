@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trainxercise/addworkout_screen.dart';
 import 'package:trainxercise/profile_screen.dart';
 import 'package:trainxercise/workout_screen.dart';
 
@@ -31,10 +32,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int currentInd = 0;
   final screens = [
-    WorkoutScreen(),
+    const WorkoutScreen(),
     Container(),
+    const AddWorkoutScreen(),
     Container(),
-    ProfileScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -54,6 +56,7 @@ class _MyAppState extends State<MyApp> {
                 icon: Icon(Icons.search), label: "Exercises"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.add), label: "Add Workout"),
+            BottomNavigationBarItem(icon: Icon(Icons.person_add), label: "Add Others"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
           ],
           fixedColor: const Color.fromRGBO(88, 11, 241, 1),

@@ -33,11 +33,19 @@ class WorkoutScreen extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: Container(
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   border: Border.all(color: Colors.grey, width: 1),
                   borderRadius: BorderRadius.circular(12),
-                ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(-3, 3),
+                      blurRadius: 5,
+                      spreadRadius: .5
+                    )
+                  ]),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       child: Row(
@@ -52,6 +60,7 @@ class WorkoutScreen extends StatelessWidget {
                             onPressed: () => {},
                             backgroundColor: Colors.transparent,
                             elevation: 0,
+                            highlightElevation: 0,
                             foregroundColor: Colors.black,
                             child: const Icon(Icons.more_vert),
                           )
@@ -103,7 +112,7 @@ class WorkoutScreen extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.bottomRight,
-                      padding: const EdgeInsets.only(top: 7, right: 20),
+                      padding: const EdgeInsets.only(right: 20),
                       child: ElevatedButton(
                         onPressed: () => {},
                         style: ButtonStyle(
