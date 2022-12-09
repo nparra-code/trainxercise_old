@@ -17,57 +17,71 @@ class SetListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 15, bottom: 15),
-      child: Column(
-        children: [
-          Container(
-            child: Row(
+      child: Container(
+        padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        child: Column(
+          children: [
+            Row(
               children: [
-                Text(
-                  setTitle,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20),
+                Container(
+                  margin: EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    setTitle,
+                    style: const TextStyle(
+                        fontFamily: "Gotham Rounded",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   child: Text(
                     "x$reps",
-                    style: const TextStyle(fontSize: 20),
+                    style: const TextStyle(
+                        fontFamily: "Gotham Rounded", fontSize: 20),
                   ),
                 )
               ],
             ),
-          ),
-          for (var item in exercises)
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              margin: const EdgeInsets.only(left: 25),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
+            Divider(
+              thickness: 1,
+              color: Colors.grey.shade300,
+            ),
+            for (var item in exercises)
+              Container(
+                padding: const EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(left: 25),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
                             item,
-                            style: const TextStyle(fontSize: 16),
+                            style: const TextStyle(
+                                fontFamily: "Gotham Rounded", fontSize: 16),
                           ),
-                        ),
-                        Container(
-                          child: Text(
+                          Text(
                             descriptions.elementAt(exercises.indexOf(item)),
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        )
-                      ],
+                            style: const TextStyle(
+                                fontFamily: "Gotham Rounded",
+                                fontWeight: FontWeight.w100,
+                                fontSize: 12),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const Icon(Icons.play_arrow)
-                ],
-              ),
-            )
-        ],
+                    const Icon(Icons.play_arrow)
+                  ],
+                ),
+              )
+          ],
+        ),
       ),
     );
   }

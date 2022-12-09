@@ -44,7 +44,7 @@ class AddWorkoutCardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     const Text(
-                      "Today's Routine",
+                      "Set",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
@@ -58,6 +58,22 @@ class AddWorkoutCardWidget extends StatelessWidget {
                         "Reps: $setReps",
                         style: const TextStyle(color: Colors.white),
                       ),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () => {},
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      highlightElevation: 0,
+                      foregroundColor: Colors.black,
+                      child: const Icon(Icons.edit),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () => {},
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      highlightElevation: 0,
+                      foregroundColor: Colors.black,
+                      child: const Icon(Icons.delete_outline),
                     )
                   ],
                 ),

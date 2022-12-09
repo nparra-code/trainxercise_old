@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainxercise/addworkout_screen.dart';
+import 'package:trainxercise/exercise_class.dart';
 import 'package:trainxercise/profile_screen.dart';
 import 'package:trainxercise/workout_screen.dart';
+
+var test1 = ExerciseClass.readJSONFile("/exerciseDatabase.json");
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(88, 11, 241, .1),
@@ -30,11 +33,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   int currentInd = 0;
   final screens = [
     const WorkoutScreen(),
     Container(),
-    const AddWorkoutScreen(),
+    AddWorkoutScreen(test: test1),
     Container(),
     const ProfileScreen(),
   ];
@@ -62,7 +66,9 @@ class _MyAppState extends State<MyApp> {
           fixedColor: const Color.fromRGBO(88, 11, 241, 1),
           unselectedItemColor: Colors.black,
           currentIndex: currentInd,
-          onTap: (index) => setState( ()=> currentInd = index),
+          onTap: (index) => setState( () {
+            currentInd = index;
+          }),
         ),
         body: screens[currentInd],
       ),

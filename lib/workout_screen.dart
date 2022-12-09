@@ -33,17 +33,16 @@ class WorkoutScreen extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.grey, width: 1),
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      offset: Offset(-3, 3),
-                      blurRadius: 5,
-                      spreadRadius: .5
-                    )
-                  ]),
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey, width: 1),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(-3, 3),
+                          blurRadius: 5,
+                          spreadRadius: .5)
+                    ]),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -54,7 +53,9 @@ class WorkoutScreen extends StatelessWidget {
                           const Text(
                             "Today's Routine",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
+                                fontFamily: "Gotham Rounded",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20),
                           ),
                           FloatingActionButton(
                             onPressed: () => {},
@@ -116,10 +117,15 @@ class WorkoutScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () => {},
                         style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.only(right: 50, left: 50)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)))),
-                        child: const Text("Done"),
+                        child: const Text(
+                          "Done",
+                          style: TextStyle(fontFamily: "Gotham Rounded"),
+                        ),
                       ),
                     )
                   ],

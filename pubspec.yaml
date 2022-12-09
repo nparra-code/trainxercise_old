@@ -86,6 +86,17 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family: Gotham Rounded
+      fonts:
+        - asset: fonts/GothamRounded-Light.ttf
+          weight: 100
+        - asset: fonts/GothamRounded-Bold.ttf
+          weight: 900
+        - asset: fonts/GothamRounded-Medium.ttf
+          weight: 500
+        - asset: fonts/GothamRounded-Book.ttf
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
