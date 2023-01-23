@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'editset_screen.dart';
 
 List<String> exerciseList = [
   "Lorem ipsum",
@@ -14,13 +15,23 @@ List<String> descList = [
   "At malesuada sem rhoncus sed."
 ];
 
-class AddWorkoutCardWidget extends StatelessWidget {
+class AddWorkoutCardWidget extends StatefulWidget {
   final int setReps;
 
   const AddWorkoutCardWidget({super.key, required this.setReps});
 
   @override
+  State<AddWorkoutCardWidget> createState() => _AddWorkoutCardWidgetState();
+}
+
+class _AddWorkoutCardWidgetState extends State<AddWorkoutCardWidget> {
+  @override
   Widget build(BuildContext context) {
+    const _divider = Divider(
+      color: Colors.grey,
+      height: 0,
+      thickness: 1,
+    );
     return Container(
         padding: const EdgeInsets.all(15.0),
         child: Container(
@@ -39,14 +50,16 @@ class AddWorkoutCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     const Text(
                       "Set",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: TextStyle(
+                          fontFamily: "Gotham Rounded",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
                     ),
                     Container(
                       padding: const EdgeInsets.all(5),
@@ -55,12 +68,16 @@ class AddWorkoutCardWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Text(
-                        "Reps: $setReps",
-                        style: const TextStyle(color: Colors.white),
+                        "Reps: ${widget.setReps}",
+                        style: const TextStyle(fontFamily: "Gotham Rounded", color: Colors.white),
                       ),
                     ),
                     FloatingActionButton(
-                      onPressed: () => {},
+                      onPressed: () => {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const EditSetScreen()))
+                      },
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                       highlightElevation: 0,
@@ -78,12 +95,16 @@ class AddWorkoutCardWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const Divider(
-                color: Colors.grey,
-                thickness: 1,
-                height: 0,
-              ),
-
+              _divider,
+              for (var exercise in exerciseList)
+                Container(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text(
+                    exercise,
+                    style: const TextStyle(
+                        fontFamily: "Gotham Rounded", fontSize: 16),
+                  ),
+                )
             ],
           ),
         ));

@@ -3,11 +3,12 @@ import 'package:trainxercise/addworkout_card_widget.dart';
 
 class AddWorkoutScreen extends StatelessWidget {
   Future<List<Map<dynamic, dynamic>>> test;
+
   AddWorkoutScreen({super.key, required this.test});
 
   @override
   Widget build(BuildContext context) {
-    final double buttonPadding = MediaQuery.of(context).size.height*0.15;
+    final double buttonPadding = MediaQuery.of(context).size.height * 0.15;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Workout"),
@@ -27,15 +28,15 @@ class AddWorkoutScreen extends StatelessWidget {
                   ),
                   AddWorkoutCardWidget(
                     setReps: 3,
-                  )
+                  ),
                 ],
               ),
             ),
             ElevatedButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.only(right: buttonPadding, left: buttonPadding)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(
+                      right: buttonPadding, left: buttonPadding)),
                 ),
                 child: const Text(
                   "Save",

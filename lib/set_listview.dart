@@ -76,7 +76,7 @@ class SetListView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Icon(Icons.play_arrow)
+                    //const Icon(Icons.play_arrow)
                   ],
                 ),
               )
