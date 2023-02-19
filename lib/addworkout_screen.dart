@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:trainxercise/addworkout_card_widget.dart';
 
 class AddWorkoutScreen extends StatelessWidget {
-  Future<List<Map<dynamic, dynamic>>> test;
 
-  AddWorkoutScreen({super.key, required this.test});
+  const AddWorkoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class AddWorkoutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Workout"),
-      ),
+        ),
       body: Container(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -26,9 +25,9 @@ class AddWorkoutScreen extends StatelessWidget {
                   AddWorkoutCardWidget(
                     setReps: 1,
                   ),
-                  AddWorkoutCardWidget(
-                    setReps: 3,
-                  ),
+                  //AddWorkoutCardWidget(
+                    //setReps: 3,
+                  //),
                 ],
               ),
             ),

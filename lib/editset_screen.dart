@@ -1,7 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class EditSetScreen extends StatelessWidget {
-  const EditSetScreen({Key? key}) : super(key: key);
+  EditSetScreen({super.key});
+
+  List _exercises = [];
+
+  Future<void> readJson() async {
+    final String response =
+    await rootBundle.loadString('assets/exerciseDatabase.json');
+    final data = await json.decode(response);
+    _exercises = data["exercises"];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,18 +21,26 @@ class EditSetScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Edit Set"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(10.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Container(
-            child: Row(
-              children: const [
-                Text("Lorem ipsum"),
-              ],
-            ),
-          ),
-        ]),
-      ),
+      body: Column(children: [
+        ElevatedButton(
+            onPressed: readJson,
+            child: const Text("Load Data")),
+        _exercises.isNotEmpty
+            ? Expanded(
+                child: ListView.builder(
+                    itemCount: _exercises.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        margin: const EdgeInsets.all(10),
+                        child: ListTile(
+                          leading: Text(_exercises[index]["id"]),
+                          title: Text(_exercises[index]["name"]),
+                          subtitle: Text(_exercises[index]["description"]),
+                        ),
+                      );
+                    }))
+            : Container()
+      ]),
     );
   }
 }

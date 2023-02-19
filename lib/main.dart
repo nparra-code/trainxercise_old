@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainxercise/addworkout_screen.dart';
-import 'package:trainxercise/exercise_class.dart';
+import 'package:trainxercise/get_data_db.dart';
 import 'package:trainxercise/profile_screen.dart';
 import 'package:trainxercise/workout_screen.dart';
 
-var test1 = ExerciseClass.readJSONFile("/exerciseDatabase.json");
+import 'exercises_screen.dart';
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(88, 11, 241, .1),
@@ -33,18 +35,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   int currentInd = 0;
-  final screens = [
-    const WorkoutScreen(),
-    Container(),
-    AddWorkoutScreen(test: test1),
-    Container(),
-    const ProfileScreen(),
-  ];
+
+  List _exercises = [];
+
+  Future<void> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/exerciseDatabase.json');
+    final data = await json.decode(response);
+    _exercises = data["exercises"];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Call the readJson method when the app starts
+    readJson();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screens = [
+      const WorkoutScreen(),
+      ExercisesScreen(exercises: _exercises),
+      AddWorkoutScreen(),
+      Container(),
+      const ProfileScreen(),
+    ];
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
@@ -54,22 +71,25 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Workout"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: "Exercises"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.add), label: "Add Workout"),
-            BottomNavigationBarItem(icon: Icon(Icons.person_add), label: "Add Others"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
-          ],
-          fixedColor: const Color.fromRGBO(88, 11, 241, 1),
-          unselectedItemColor: Colors.black,
-          currentIndex: currentInd,
-          onTap: (index) => setState( () {
-            currentInd = index;
-          }),
-        ),
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Workout"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.search), label: "Exercises"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add), label: "Add Workout"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person_add), label: "Add Others"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: "Profile")
+            ],
+            fixedColor: const Color.fromRGBO(88, 11, 241, 1),
+            unselectedItemColor: Colors.black,
+            currentIndex: currentInd,
+            onTap: (index) {
+              setState(() {
+                currentInd = index;
+              });
+            }),
         body: screens[currentInd],
       ),
     );

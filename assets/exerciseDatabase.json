@@ -1,19 +1,19 @@
 {
   "exercises": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Burpees",
       "description": "Proin sollicitudin magna eget dui cursus.",
       "haveWeight": false
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Barbell Bench Press",
       "description": "Proin sollicitudin magna eget dui cursus.",
       "haveWeight": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Dumbbel Incline Chest Flys",
       "description": "Proin sollicitudin magna eget dui cursus.",
       "haveWeight": true

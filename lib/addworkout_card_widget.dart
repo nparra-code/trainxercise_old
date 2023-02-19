@@ -73,10 +73,11 @@ class _AddWorkoutCardWidgetState extends State<AddWorkoutCardWidget> {
                       ),
                     ),
                     FloatingActionButton(
+                      heroTag: "Edit Set",
                       onPressed: () => {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const EditSetScreen()))
+                                EditSetScreen()))
                       },
                       backgroundColor: Colors.transparent,
                       elevation: 0,
@@ -85,6 +86,7 @@ class _AddWorkoutCardWidgetState extends State<AddWorkoutCardWidget> {
                       child: const Icon(Icons.edit),
                     ),
                     FloatingActionButton(
+                      heroTag: "Delete Set",
                       onPressed: () => {},
                       backgroundColor: Colors.transparent,
                       elevation: 0,
