@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1047327723976",
+    "project_id": "trainxercise",
+    "storage_bucket": "trainxercise.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047327723976:android:1cd93b8538d91f4ffaf0fd",
+        "android_client_info": {
+          "package_name": "com.example.trainxercise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047327723976-or8f3r80f8ui0pf5d0cdllck545u0ae5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUn1wpdTTEwgZqcTTrCEGdPWbX3CibKYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047327723976-or8f3r80f8ui0pf5d0cdllck545u0ae5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1047327723976-kv6nkqlmarge51sif5g81fa1qs9gi607.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trainxercise"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainxercise/personalinfo_widget.dart';
+import 'package:trainxercise/widgets/personalinfo_widget.dart';
 
 class MedicalWidget extends StatelessWidget {
   final bloodtype;

@@ -1,13 +1,16 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trainxercise/addworkout_screen.dart';
-import 'package:trainxercise/get_data_db.dart';
-import 'package:trainxercise/profile_screen.dart';
-import 'package:trainxercise/workout_screen.dart';
+import 'package:trainxercise/screens/addworkout_screen.dart';
+import 'package:trainxercise/screens/profile_screen.dart';
+import 'package:trainxercise/screens/workout_screen.dart';
+import 'package:trainxercise/screens/exercises_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-import 'exercises_screen.dart';
+// ...
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(88, 11, 241, .1),
@@ -41,7 +44,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> readJson() async {
     final String response =
-        await rootBundle.loadString('assets/exerciseDatabase.json');
+        await rootBundle.loadString('assets/exercises.json');
     final data = await json.decode(response);
     _exercises = data["exercises"];
   }
@@ -49,8 +52,12 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    Firebase.initializeApp().whenComplete(() {
+      print("firebase initialized");
+      setState(() {});
+    });
+
     // Call the readJson method when the app starts
-    readJson();
   }
 
   @override
@@ -59,9 +66,18 @@ class _MyAppState extends State<MyApp> {
       const WorkoutScreen(),
       ExercisesScreen(exercises: _exercises),
       AddWorkoutScreen(),
-      Container(),
+      //Container(),
       const ProfileScreen(),
     ];
+    FirebaseFirestore.instance
+        .collection("exercise")
+        .snapshots()
+        .listen((event) {
+          _exercises.clear();
+      for (var element in event.docs) {
+        _exercises.add(element);
+      }
+    });
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
@@ -77,8 +93,8 @@ class _MyAppState extends State<MyApp> {
                   icon: Icon(Icons.search), label: "Exercises"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.add), label: "Add Workout"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person_add), label: "Add Others"),
+              //BottomNavigationBarItem(
+              //    icon: Icon(Icons.person_add), label: "Add Others"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: "Profile")
             ],

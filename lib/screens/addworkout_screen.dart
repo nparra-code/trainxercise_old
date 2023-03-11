@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trainxercise/addworkout_card_widget.dart';
+import 'package:trainxercise/widgets/addworkout_card_widget.dart';
 
 class AddWorkoutScreen extends StatelessWidget {
-
   const AddWorkoutScreen({super.key});
 
   @override
@@ -10,25 +9,25 @@ class AddWorkoutScreen extends StatelessWidget {
     final double buttonPadding = MediaQuery.of(context).size.height * 0.15;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text("Add Workout"),
-        ),
+      ),
       body: Container(
         padding: const EdgeInsets.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Stack(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              child: ListView(
-                children: const [
-                  AddWorkoutCardWidget(
-                    setReps: 1,
-                  ),
-                  //AddWorkoutCardWidget(
-                    //setReps: 3,
-                  //),
-                ],
+              height: MediaQuery.of(context).size.height * 0.9,
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (BuildContext context, int index) {
+                  return AddWorkoutCardWidget(
+                    setReps: 4,
+                    setNumber: '$index',
+                  );
+                },
+                //AddWorkoutCardWidget(
+                //setReps:
               ),
             ),
             ElevatedButton(

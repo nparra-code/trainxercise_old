@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainxercise/personalinfo_widget.dart';
+import 'package:trainxercise/widgets/personalinfo_widget.dart';
 
 class TrainerWidget extends StatefulWidget {
   const TrainerWidget({Key? key}) : super(key: key);

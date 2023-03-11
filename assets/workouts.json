@@ -1,0 +1,17 @@
+{
+  "workouts": [
+    {
+      "id": "1",
+      "sets": [
+        {
+          "exercises": [],
+          "weights": [],
+          "exercisesReps": [],
+          "weightUnits": "",
+          "setsReps": []
+        },
+        {}
+      ]
+    }
+  ]
+}

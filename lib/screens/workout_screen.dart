@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainxercise/set_listview.dart';
+import 'package:trainxercise/widgets/set_listview_widget.dart';
 
 List<String> exerciseList = [
   "Lorem ipsum",
@@ -22,6 +22,7 @@ class WorkoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: const Text('Trainxercise'),
         ),
         body: NotificationListener<OverscrollIndicatorNotification>(

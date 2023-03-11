@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trainxercise/medical_widget.dart';
-import 'package:trainxercise/personalinfo_widget.dart';
-import 'package:trainxercise/trainer_widget.dart';
+import 'package:trainxercise/widgets/medical_widget.dart';
+import 'package:trainxercise/widgets/personalinfo_widget.dart';
+import 'package:trainxercise/widgets/trainer_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -20,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text("Profile"),
       ),
       body: Container(

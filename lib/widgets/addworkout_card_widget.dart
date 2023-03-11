@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'editset_screen.dart';
+import '../screens/editset_screen.dart';
 
 List<String> exerciseList = [
+  "Lorem ipsum",
+  "Dolor sit amet",
+  "Consectetur adipiscing",
+  "Suspendisse mattis",
   "Lorem ipsum",
   "Dolor sit amet",
   "Consectetur adipiscing",
@@ -17,8 +21,10 @@ List<String> descList = [
 
 class AddWorkoutCardWidget extends StatefulWidget {
   final int setReps;
+  final String? setNumber;
 
-  const AddWorkoutCardWidget({super.key, required this.setReps});
+  const AddWorkoutCardWidget(
+      {super.key, required this.setReps, this.setNumber});
 
   @override
   State<AddWorkoutCardWidget> createState() => _AddWorkoutCardWidgetState();
@@ -47,37 +53,35 @@ class _AddWorkoutCardWidgetState extends State<AddWorkoutCardWidget> {
                     spreadRadius: .5)
               ]),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.only(
+                    right: 5, top: 5, bottom: 5, left: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Set",
-                      style: TextStyle(
+                    Text(
+                      "Set ${widget.setNumber}, ${widget.setReps} reps",
+                      style: const TextStyle(
                           fontFamily: "Gotham Rounded",
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF9163E4),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Text(
-                        "Reps: ${widget.setReps}",
-                        style: const TextStyle(fontFamily: "Gotham Rounded", color: Colors.white),
-                      ),
+                    const SizedBox(
+                      width: 75,
+                      height: 2,
+                      //color: Colors.black,
                     ),
                     FloatingActionButton(
-                      heroTag: "Edit Set",
+                      heroTag: "editSet${widget.setNumber}",
                       onPressed: () => {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                EditSetScreen()))
+                            builder: (BuildContext context) => EditSetScreen(
+                                  exercises: exerciseList,
+                                )))
                       },
                       backgroundColor: Colors.transparent,
                       elevation: 0,
@@ -86,7 +90,7 @@ class _AddWorkoutCardWidgetState extends State<AddWorkoutCardWidget> {
                       child: const Icon(Icons.edit),
                     ),
                     FloatingActionButton(
-                      heroTag: "Delete Set",
+                      heroTag: "deleteSet${widget.setNumber}",
                       onPressed: () => {},
                       backgroundColor: Colors.transparent,
                       elevation: 0,
@@ -100,7 +104,7 @@ class _AddWorkoutCardWidgetState extends State<AddWorkoutCardWidget> {
               _divider,
               for (var exercise in exerciseList)
                 Container(
-                  padding: EdgeInsets.all(5.0),
+                  padding: EdgeInsets.all(12.0),
                   child: Text(
                     exercise,
                     style: const TextStyle(
