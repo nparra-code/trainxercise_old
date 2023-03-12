@@ -1,14 +1,9 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:trainxercise/screens/addworkout_screen.dart';
-import 'package:trainxercise/screens/profile_screen.dart';
-import 'package:trainxercise/screens/workout_screen.dart';
-import 'package:trainxercise/screens/exercises_screen.dart';
+import 'package:trainxercise/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:trainxercise/login_state.dart';
+import 'login_page.dart';
+import 'package:provider/provider.dart';
 
 // ...
 
@@ -26,7 +21,11 @@ Map<int, Color> color = {
 };
 MaterialColor primaryColor = MaterialColor(0xFF580BF1, color);
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp().whenComplete(() {
+    print("firebase initialized");
+  });
   runApp(const MyApp());
 }
 
@@ -38,75 +37,31 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int currentInd = 0;
-
-  List _exercises = [];
-
-  Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/exercises.json');
-    final data = await json.decode(response);
-    _exercises = data["exercises"];
-  }
-
+  bool loggedIn = false;
   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp().whenComplete(() {
-      print("firebase initialized");
-      setState(() {});
-    });
-
-    // Call the readJson method when the app starts
   }
 
   @override
   Widget build(BuildContext context) {
-    final screens = [
-      const WorkoutScreen(),
-      ExercisesScreen(exercises: _exercises),
-      AddWorkoutScreen(),
-      //Container(),
-      const ProfileScreen(),
-    ];
-    FirebaseFirestore.instance
-        .collection("exercise")
-        .snapshots()
-        .listen((event) {
-          _exercises.clear();
-      for (var element in event.docs) {
-        _exercises.add(element);
-      }
-    });
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MaterialApp(
-      title: 'Trainxercise',
-      theme: ThemeData(
-        primarySwatch: primaryColor,
-      ),
-      home: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Workout"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search), label: "Exercises"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.add), label: "Add Workout"),
-              //BottomNavigationBarItem(
-              //    icon: Icon(Icons.person_add), label: "Add Others"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: "Profile")
-            ],
-            fixedColor: const Color.fromRGBO(88, 11, 241, 1),
-            unselectedItemColor: Colors.black,
-            currentIndex: currentInd,
-            onTap: (index) {
-              setState(() {
-                currentInd = index;
-              });
-            }),
-        body: screens[currentInd],
+    return ChangeNotifierProvider<LoginState>(
+      create: (context) => LoginState(),
+      child: MaterialApp(
+        title: 'Trainxercise',
+        theme: ThemeData(
+          primarySwatch: primaryColor,
+        ),
+        routes: {
+          '/': ((context) {
+            var state = Provider.of<LoginState>(context);
+            if (state.isLoggedIn()) {
+              return HomePage();
+            } else {
+              return LoginPage();
+            }
+          })
+        },
       ),
     );
   }
