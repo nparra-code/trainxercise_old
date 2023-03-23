@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/editset_screen.dart';
+import '../screens/edit_set_screen.dart';
 
 List<String> exerciseList = [
   "Lorem ipsum",

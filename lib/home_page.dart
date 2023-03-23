@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trainxercise/screens/addworkout_screen.dart';
+import 'package:trainxercise/screens/add_workout_screen.dart';
+import 'package:trainxercise/screens/edit_workouts_screen.dart';
 import 'package:trainxercise/screens/exercises_screen.dart';
 import 'package:trainxercise/screens/profile_screen.dart';
 import 'package:trainxercise/screens/workout_screen.dart';
 
 class HomePage extends StatefulWidget {
   final List exercises = [];
+  final List workouts = [];
 
   HomePage({super.key});
 
@@ -23,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     final screens = [
       const WorkoutScreen(),
       ExercisesScreen(exercises: widget.exercises),
-      const AddWorkoutScreen(),
+      EditWorkoutScreen(workouts: widget.workouts,),
       //Container(),
       const ProfileScreen(),
     ];
@@ -34,6 +36,15 @@ class _HomePageState extends State<HomePage> {
       widget.exercises.clear();
       for (var element in event.docs) {
         widget.exercises.add(element);
+      }
+    });
+    FirebaseFirestore.instance
+        .collection("workouts")
+        .snapshots()
+        .listen((event) {
+      widget.workouts.clear();
+      for (var element in event.docs) {
+        widget.workouts.add(element);
       }
     });
     SystemChrome.setSystemUIOverlayStyle(

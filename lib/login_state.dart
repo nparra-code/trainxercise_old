@@ -15,7 +15,7 @@ class LoginState with ChangeNotifier {
     notifyListeners();
 
     var user = await _handleSignIn();
-    
+
     loading = false;
 
     if (user != null) {
@@ -28,6 +28,7 @@ class LoginState with ChangeNotifier {
   }
 
   void logout() {
+    googleSignIn.signOut();
     loggedIn = false;
     notifyListeners();
   }
