@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainxercise/screens/add_workout_screen.dart';
+import 'package:trainxercise/screens/db_setup_screen.dart';
 import 'package:trainxercise/screens/edit_workouts_screen.dart';
 import 'package:trainxercise/screens/exercises_screen.dart';
 import 'package:trainxercise/screens/profile_screen.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
       EditWorkoutScreen(workouts: widget.workouts,),
       //Container(),
       const ProfileScreen(),
+      const DBSetUp()
     ];
     FirebaseFirestore.instance
         .collection("exercise")
@@ -59,7 +61,8 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.add), label: "Add Workout"),
             //BottomNavigationBarItem(
             //    icon: Icon(Icons.person_add), label: "Add Others"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "DB")
           ],
           fixedColor: const Color.fromRGBO(88, 11, 241, 1),
           unselectedItemColor: Colors.black,

@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginState with ChangeNotifier {
+  User? actualUser;
   bool loggedIn = false;
   bool loading = false;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth auth = FirebaseAuth.instance;
+  
 
   bool isLoggedIn() => loggedIn;
 
@@ -19,6 +21,7 @@ class LoginState with ChangeNotifier {
     loading = false;
 
     if (user != null) {
+      actualUser = user;
       loggedIn = true;
       notifyListeners();
     } else {
